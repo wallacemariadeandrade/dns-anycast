@@ -48,7 +48,7 @@ update-grub
 echo "=========================================="
 echo "Instalando Unbound..."
 echo "=========================================="
-apt -t bullseye-backports install unbound dns-root-data -y
+apt install unbound dns-root-data -y
 mkdir -p /var/log/unbound
 touch /var/log/unbound/unbound.log
 chown -R unbound:unbound /var/log/unbound/
