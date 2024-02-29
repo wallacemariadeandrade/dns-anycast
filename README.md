@@ -7,7 +7,7 @@ VALIDADO EM DEBIAN 11!! PARA OUTRAS DISTROS, TESTAR!!
 
 ``` 
 
-apt update -y && apt upgrade -y && apt install git -y
+apt install git -y
 git clone https://github.com/wallacemariadeandrade/dns-anycast.git
 cd dns-anycast
 chmod +x dns-anycast.sh
