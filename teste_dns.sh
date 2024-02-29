@@ -16,6 +16,7 @@ www.redhat.com
 )
 corte_taxa_falha=100 #Porcentagem de falha para executar uma ação
 NEIGHBOR=10.0.0.2
+NEIGHBOR_V6=2001:db8::1
 AS=64513
 #-----------------------------------------------------------------------
 qt_falhas=0
@@ -38,13 +39,13 @@ echo "Falhas $qt_falhas/$qt_total ($taxa_falha%)"
 habilitado="`vtysh -c 'show run' | grep \"neighbor $NEIGHBOR prefix-list BLOQUEIA-TUDO out\"`"
 if [ "$taxa_falha" -ge "$corte_taxa_falha" ]; then
    if [ "$habilitado" == "" ]; then
-      vtysh -c 'conf t' -c "router bgp $AS" -c 'address-family ipv4 unicast' -c "neighbor $NEIGHBOR prefix-list BLOQUEIA-TUDO out" -c 'end' -c 'wr'
+      vtysh -c 'conf t' -c "router bgp $AS" -c 'address-family ipv4 unicast' -c "neighbor $NEIGHBOR prefix-list BLOQUEIA-TUDO out" -c "exit-address-family"  -c 'address-family ipv6 unicast'  -c "neighbor $NEIGHBOR_V6 prefix-list BLOQUEIA-TUDO out" -c 'end' -c 'wr'
       echo "caiu: `date`" >> /root/dnsreport.log
    fi
    exit
 else
    if [ "$habilitado" != "" ]; then
-      vtysh -c 'conf t' -c "router bgp $AS" -c 'address-family ipv4 unicast' -c "no neighbor $NEIGHBOR prefix-list BLOQUEIA-TUDO out" -c 'end' -c 'wr'
+      vtysh -c 'conf t' -c "router bgp $AS" -c 'address-family ipv4 unicast' -c "no neighbor $NEIGHBOR prefix-list BLOQUEIA-TUDO out" -c "exit-address-family"  -c 'address-family ipv6 unicast'  -c "no neighbor $NEIGHBOR_V6 prefix-list BLOQUEIA-TUDO out" -c 'end' -c 'wr'
       echo "voltou: `date`" >> /root/dnsreport.log
    fi
 fi
