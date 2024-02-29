@@ -10,10 +10,10 @@ echo "Atualizando os repositórios locais..."
 echo "=========================================="
 cp /etc/apt/sources.list /etc/apt/sources.list.old
 echo "" > /etc/apt/sources.list
-echo "deb http://security.debian.org/debian-security bullseye-security main contrib non-free" > /etc/apt/sources.list
-echo "deb http://deb.debian.org/debian bullseye main non-free contrib" > /etc/apt/sources.list
-echo "deb http://deb.debian.org/debian bullseye-updates main contrib non-free" > /etc/apt/sources.list
-echo "deb http://deb.debian.org/debian bullseye-backports main contrib non-free" > /etc/apt/sources.list
+echo "deb http://security.debian.org/debian-security bullseye-security main contrib non-free" >> /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian bullseye main non-free contrib" >> /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian bullseye-updates main contrib non-free" >> /etc/apt/sources.list
+echo "deb http://deb.debian.org/debian bullseye-backports main contrib non-free" >> /etc/apt/sources.list
 
 echo "=========================================="
 echo "Instalando pacotes necessários..."
@@ -121,5 +121,7 @@ NÃO SE ESQUEÇA DE APLICAR O REBOOT DEPOIS, NESSE CASO.
 
 
 EOF
+
+read teste
 
 reboot
